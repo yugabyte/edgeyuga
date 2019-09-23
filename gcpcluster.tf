@@ -1,9 +1,9 @@
 provider "google" { 
   # Provide your GCP Creadentilals 
-  credentials = "${file("omni-163105-205924bf2b1f.json")}"
+  credentials = "${file("xyz.json")}"
 
   # The name of your GCP project 
-  project = "omni-163105"
+  project = "xyz-12345"
 }
 
 module "yugabyte-db-cluster" {
