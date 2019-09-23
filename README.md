@@ -1,4 +1,3 @@
-![alt text](https://github.com/manish-infracloud/EdgeYuga/blob/development/Architecture.png)
 1. Create a yugabyte cluster using the **gcpcluster.tf** file:- 
     * Follow guide here: https://github.com/YugaByte/terraform-gcp-yugabyt 
 2. After the cluster creation, need to create a tserver on tiny vm.
@@ -17,3 +16,6 @@
         * Exit
 6. Create the sample yb demo database and tables with the shell script:
     * ./**DataCreation.sh** (Pass the variable "tserver" with the name of your tserver pod)
+
+Architecture Diagram:
+![alt text](https://github.com/manish-infracloud/EdgeYuga/blob/development/Architecture.png)
