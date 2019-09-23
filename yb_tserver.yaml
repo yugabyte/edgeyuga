@@ -1,0 +1,86 @@
+apiVersion: v1
+kind: Service
+metadata:
+  # This is a "headless" service for the yb-tserver which exists to allow discovery of the set of
+  # member pods (tservers).
+  name: yb-tservers
+  labels:
+    app: yb-tserver
+spec:
+  clusterIP: None
+  ports:
+  - name: ui
+    port: 9000
+  - name: rpc-port
+    port: 9100
+  - name: cassandra
+    port: 9042
+  - name: redis
+    port: 6379
+  - name: postgres
+    port: 5433
+  selector:
+    app: yb-tserver
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: yb-tserver
+  labels:
+    app: yb-tserver
+spec:
+  serviceName: yb-tservers
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yb-tserver
+  template:
+    metadata:
+      labels:
+        app: yb-tserver
+    spec:
+      containers:
+      - name: yb-tserver
+        image: yugabytedb/yugabyte:latest
+        imagePullPolicy: Always
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+                fieldPath: metadata.namespace
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        command:
+          - "/home/yugabyte/bin/yb-tserver"
+          - "--fs_data_dirs=/mnt/disk2,/mnt/disk3"
+          - "--start_pgsql_proxy"
+          - "--pgsql_proxy_bind_address=$(POD_IP):5433"
+          - "--use_private_ip=never"
+          - "--tserver_master_addrs=34.82.129.196:7100,35.197.122.195:7100,34.83.51.84:7100"
+          - "--tserver_master_replication_factor=3"
+          - "--logtostderr"
+        ports:
+        - containerPort: 9000
+          name: tserver-ui
+        - containerPort: 9100
+          name: tserver-rpc
+        - containerPort: 9042
+          name: cassandra
+        - containerPort: 6379
+          name: redis
+        - containerPort: 5433
+          name: postgres
+        volumeMounts:
+        - name: datadir2
+          mountPath: /mnt/disk2
+        - name: datadir3
+          mountPath: /mnt/disk3
+      volumes:
+      - name: datadir2
+        hostPath:
+          path: "/mnt/disks/ssd2"
+      - name: datadir3
+        hostPath:
+          path: "/mnt/disks/ssd3"
