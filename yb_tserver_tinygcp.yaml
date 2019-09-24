@@ -58,8 +58,11 @@ spec:
           - "--start_pgsql_proxy"
           - "--pgsql_proxy_bind_address=$(POD_IP):5433"
           - "--use_private_ip=never"
-          - "--tserver_master_addrs=34.82.129.196:7100,35.197.122.195:7100,34.83.51.84:7100"
+          - "--tserver_master_addrs=35.197.122.195:7100,34.83.51.84:7100,34.82.129.196:7100"
           - "--tserver_master_replication_factor=3"
+          - "--placement_cloud=GCP"
+          - "--placement_region=k3s"
+          - "--placement_zone=us-central1-a"
           - "--logtostderr"
         ports:
         - containerPort: 9000
@@ -84,3 +87,13 @@ spec:
       - name: datadir3
         hostPath:
           path: "/mnt/disks/ssd3"
+      hostAliases:
+        - ip: "34.82.129.196"
+          hostnames:
+          - "yugabyte-user-n3.c.xyz-123.internal"
+        - ip: "34.83.51.84"
+          hostnames:
+          - "yugabyte-user-n2.c.xyz-123.internal"
+        - ip: "35.197.122.195"
+          hostnames:
+          - "yugabyte-user-n1.c.xyz-123.internal"

@@ -7,21 +7,22 @@ provider "google" {
 }
 
 module "yugabyte-db-cluster" {
-source = "github.com/YugaByte/terraform-gcp-yugabyte.git"
+//source = "github.com/YugaByte/terraform-gcp-yugabyte.git"
+source = "github.com/vp15591/terraform-gcp-yugabyte/tree/bug-fix"
 # The name of the cluster to be created.
 cluster_name = "test-yugabyte-k3s"
 
- # key pair.
+ # Path to key pair for the host machine.
 ssh_private_key ="id_rsa"
 ssh_public_key = "id_rsa.pub"
-ssh_user = "manish"
+ssh_user = "user"
 
 # The region name where the nodes should be spawned.
 region_name = "us-east1"
 
 # Replication factor.
-replication_factor = "1"
+replication_factor = "3"
 
 # The number of nodes in the cluster, this cannot be lower than the replication factor.
-node_count = "1"
+node_count = "3"
 }
