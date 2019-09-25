@@ -1,5 +1,5 @@
 #!/bin/bash
-tmaster="yugabyte-vaibhav-n1"
+tmaster="yugabyte-user-n1"
 function LoadData() {
 
     for i in {1..100};
