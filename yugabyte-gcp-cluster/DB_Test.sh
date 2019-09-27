@@ -1,6 +1,6 @@
 #!/bin/bash
 tmaster="yugabyte-user-n1"
-function LoadData() {
+function CountData() {
 
     for i in {1..100};
     do
@@ -8,4 +8,4 @@ function LoadData() {
     sleep 3s;
     done
 }
-LoadData
+CountData
