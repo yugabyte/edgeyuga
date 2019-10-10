@@ -37,6 +37,7 @@ EOF
 createDatabase
 
 function cleanup() {
+    cd ..
     rm -rf $data_dir schema.sql
     kubectl exec yb-tserver-0 -- rm -rf $data_dir schema.sql
 }
