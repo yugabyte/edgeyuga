@@ -2,16 +2,41 @@
 Deploy and run YugaByte cluster on gcp and Tserver inside k3s.
 
 ## Pre-req
-1. Hashicorp Terraform is installed on your machine. (Follow (these instructions)[https://learn.hashicorp.com/terraform/getting-started/install.html], if it is not installed)
+1. Hashicorp Terraform is installed on your machine. Follow [these](https://learn.hashicorp.com/terraform/getting-started/install.html) instructions, if it is not already installed.
 2. GCP account with owner role. 
 
 ## Install Yugabyte Cluster on 3 nodes in GCP
-0. Follow [these](https://cloud.google.com/docs/authentication/getting-started) instructions to create a service account & create a gcp credentials json file.
+0. Follow instructions [here](https://cloud.google.com/docs/authentication/getting-started) to create a service account & create a gcp credentials json file.
 1. Clone this repo: ``` git clone git@github.com:infracloudio/EdgeYuga.git ```
 2. Change to yugabyte-gcp-cluster directory in the cloned directory
 3. Edit **yb_cluster_gcp.tf** file to update the location of the credentials json file created in step #0.
-4. Also update your project id (you can find it in gcp dashboard under Project info: Project ID)along with path to key pair and user for your host machine (default location is $HOME/.ssh/id_rsa.pub & id_rsa, if you dont have alraedy, can generate a new following steps from [here](https://www.ssh.com/ssh/keygen/)).
-5. Now for creating the instances and bring up the cluster follow "Usage" section [here](https://github.com/yugabyte/terraform-gcp-yugabyte)
+4. Update your project id (you can find it in gcp dashboard under Project info: Project ID)
+5. Update path to key pair and user for your host machine (default location is $HOME/.ssh/id_rsa.pub & id_rsa). Generate a new following steps from [here](https://www.ssh.com/ssh/keygen/).
+5. Now for creating the instances and bring up the cluster follow below steps:-  
+   * Init terraform first if you have not already done so.
+
+    ```
+    $ terraform init
+    ```
+
+   * To check what changes are going to happen in the environment run the following 
+
+    ```
+    $ terraform plan
+    ```
+
+   * Now run the following to create the instances and bring up the cluster.
+
+    ```
+    $ terraform apply
+    ```
+
+   * Once the cluster is created, you can go to the URL `http://<node ip or dns name>:7000` to view the UI. You can find the node's ip or dns by running the following:
+
+    ```
+    terraform state show google_compute_instance.yugabyte_node[0]
+    ```
+    For detailed usage check "Usage" section [here](https://github.com/yugabyte/terraform-gcp-yugabyte)
 
 ## Config
 1. After the cluster creation, deploy a tiny vm and install k3s in gcp.
