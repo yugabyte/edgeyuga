@@ -59,4 +59,4 @@ Deploy and run YugaByte cluster on gcp and Tserver inside k3s.
         * ``` ./DB_Test ``` (Shows the counts for the table "orders" )
 
 Architecture Diagram:
-![alt text](https://github.com/manish-infracloud/EdgeYuga/blob/development/Architecture.png)
+![alt text](https://github.com/infracloudio/EdgeYuga/blob/development/yugabyte-gcp-cluster/Architecture.png)
