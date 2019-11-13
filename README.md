@@ -1,5 +1,5 @@
 # EdgeYuga
-Setup Yugabyte DB on edge locations with K3s & YugabyteDB.
+Setup YugabyteDB on edge locations with K3s.
 
 
 # 1. yugabyte-gcp-cluster 
