@@ -1,5 +1,5 @@
 # yugabyte-k3s-cluster
-Deploy and run YugaByte DB on k3s.
+Deploy and run YugabyteDB on k3s.
 
 ## Config
 * First create an instance
@@ -7,7 +7,7 @@ Deploy and run YugaByte DB on k3s.
     * Install k3s in it: 
         * ``` curl -sfL https://get.k3s.io | sh - ```
         * Refer https://github.com/rancher/k3s for more info on k3s.
-2. Deploy yugabyte cluster inside the k3s:
+2. Deploy YugabyteDB cluster inside the k3s:
     * Clone this repo: ``` git clone git@github.com:infracloudio/EdgeYuga.git ```
     * Change to yugabyte-k3s-cluster directory in the cloned directory
     * Run ``` kubectl create -f yugabyte-cluster.yaml ```
@@ -23,5 +23,5 @@ Deploy and run YugaByte DB on k3s.
         ``` ./DB_Test ``` 
         (Pass value to the variable "host" with the name of your tserver node)
         
-        If your are getting output with increasing number of counts for the table "orders" you have successfully configured the yugabyte DB.
+        If your are getting output with increasing number of counts for the table "orders" you have successfully configured the YugabyteDB.
 
