@@ -8,7 +8,7 @@ Deploy and run YugabyteDB on k3s.
         * ``` curl -sfL https://get.k3s.io | sh - ```
         * Refer https://github.com/rancher/k3s for more info on k3s.
 2. Deploy YugabyteDB cluster inside the k3s:
-    * Clone this repo: ``` git clone git@github.com:infracloudio/EdgeYuga.git ```
+    * Clone this repo: ``` git clone git@github.com:yugabyte/EdgeYuga.git ```
     * Change to yugabyte-k3s-cluster directory in the cloned directory
     * Run ``` kubectl create -f yugabyte-cluster.yaml ```
 3. Now for testing lets create, load & test the sample yb_demo database and tables using below scripts:
