@@ -1,13 +1,13 @@
 # yugabyte-gcp-cluster
-Deploy and run YugaByte cluster on gcp and Tserver inside k3s.
+Deploy and run YugabyteDB yb-master on GCP VMs and yb-tserver inside k3s.
 
 ## Pre-req
 1. Hashicorp Terraform is installed on your machine. Follow [these](https://learn.hashicorp.com/terraform/getting-started/install.html) instructions, if it is not already installed.
 2. GCP account with owner role. 
 
-## Install Yugabyte Cluster on 3 nodes in GCP
+## Install YugabyteDB Cluster on 3 nodes in GCP
 0. Follow instructions [here](https://cloud.google.com/docs/authentication/getting-started) to create a service account & create a gcp credentials json file.
-1. Clone this repo: ``` git clone git@github.com:infracloudio/EdgeYuga.git ```
+1. Clone this repo: ``` git clone git@github.com:yugabyte/EdgeYuga.git ```
 2. Change to yugabyte-gcp-cluster directory in the cloned directory
 3. Edit **yb_cluster_gcp.tf** file to update the location of the credentials json file created in step #0.
 4. Update your project id (you can find it in gcp dashboard under Project info: Project ID)
@@ -39,7 +39,7 @@ Deploy and run YugaByte cluster on gcp and Tserver inside k3s.
     For detailed usage check "Usage" section [here](https://github.com/yugabyte/terraform-gcp-yugabyte)
 
 ## Config
-1. After the cluster creation, deploy a tiny vm and install k3s in gcp.
+1. After the cluster creation, deploy a tiny vm and install k3s in GCP.
     * launch a custom vm with 1 gb ram and 1 vcpu.
     * Install k3s on top of tiny vm: 
         * ``` curl -sfL https://get.k3s.io | sh - ```
